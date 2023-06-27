@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Padronização da Assinatura Digital</title>
+  <style>
+    .calculator {
+      width: 220px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .calculator input[type="number"] {
+      width: 94%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    .calculator button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>Assinatura Digital</h2>
+    <input type="number" id="alt" placeholder="Altura">
+    <input type="number" id="larg" placeholder="Largura">
+    <button onclick="compara()">Comparar</button>
+    <p id="resultado"></p>
+    <p id="resultado1"></p>
+  </div>
+
+  <script>
+    function compara() {
+      var alt = parseFloat(document.getElementById("alt").value);
+      var larg = parseFloat(document.getElementById("larg").value);
+
+      if (alt/125 > larg/192){
+        var X = alt*(192/125)
+        var Y = alt
+        document.getElementById("resultado").innerHTML = "A altura segue:" + Y;
+        document.getElementById("resultado1").innerHTML = "Use a largura: " + X;
+      }else{
+        var Y = larg*(125/192)
+        var X = larg
+        document.getElementById("resultado").innerHTML = "Use a altura: " + Y;
+        document.getElementById("resultado1").innerHTML = "A largura segue:" + X;
+      }
+    }
+
+    function processarImagem() {
+      var arquivo = document.getElementById("inputFile").files[0];
+      var leitor = new FileReader();
+
+      leitor.onload = function(event) {
+        var imagemOriginal = new Image();
+        imagemOriginal.src = event.target.result;
+
+        var canvas = document.createElement("canvas");
+        var contexto = canvas.getContext("2d");
+        canvas.width = 192 ;
+        canvas.height = 125;
+        contexto.drawImage(imagemOriginal, 1, 1);
+        contexto.scale(1, 1);
+    
+
+        var novaImagem = new Image();
+        novaImagem.src = canvas.toDataURL();
+
+        document.getElementById("resultado2").appendChild(novaImagem);
+      }
+
+      leitor.readAsDataURL(arquivo);
+    }
+  </script>
+
+  <input type="file" id="inputFile">
+  <button onclick="processarImagem()">Processar</button>
+  <div id="resultado2"></div>
+
+</body>
+</html>
