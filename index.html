@@ -2,86 +2,38 @@
 <html>
 <head>
   <title>Padronização da Assinatura Digital</title>
-  <style>
-    .calculator {
-      width: 220px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
+  <script src="js/jquery-3.6.4.js"></script>
+  <script src="js/script.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-    .calculator input[type="number"] {
-      width: 94%;
-      padding: 5px;
-      margin-bottom: 10px;
-    }
-
-    .calculator button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
-  <div class="calculator">
+  
+  <div class="container">
     <h2>Assinatura Digital</h2>
-    <input type="number" id="alt" placeholder="Altura">
-    <input type="number" id="larg" placeholder="Largura">
-    <button onclick="compara()">Comparar</button>
-    <p id="resultado"></p>
-    <p id="resultado1"></p>
+    <input type="file" id="inputFile"> 
+    <br></br>
+    <button onclick="processarImagem()">Processar</button>
+    <div id="resultado2"></div>
   </div>
 
-  <script>
-    function compara() {
-      var alt = parseFloat(document.getElementById("alt").value);
-      var larg = parseFloat(document.getElementById("larg").value);
+  <br></br>
 
-      if (alt/125 > larg/192){
-        var X = alt*(192/125)
-        var Y = alt
-        document.getElementById("resultado").innerHTML = "A altura segue:" + Y;
-        document.getElementById("resultado1").innerHTML = "Use a largura: " + X;
-      }else{
-        var Y = larg*(125/192)
-        var X = larg
-        document.getElementById("resultado").innerHTML = "Use a altura: " + Y;
-        document.getElementById("resultado1").innerHTML = "A largura segue:" + X;
-      }
-    }
+  <div class="container">
+    <h2>Comparação de tamanho</h2>
+    <button id="idbutton">Abrir</button>
 
-    function processarImagem() {
-      var arquivo = document.getElementById("inputFile").files[0];
-      var leitor = new FileReader();
+      <div class="containercompara" id="idcontainercompara">
+        <input type="number" id="alt" placeholder="Altura">
+        <input type="number" id="larg" placeholder="Largura">
+        <button onclick="compara()">Comparar</button>
+        <p id="resultado"></p>
+        <p id="resultado1"></p>
+      </div>
 
-      leitor.onload = function(event) {
-        var imagemOriginal = new Image();
-        imagemOriginal.src = event.target.result;
+  </div>
 
-        var canvas = document.createElement("canvas");
-        var contexto = canvas.getContext("2d");
-        canvas.width = 192 ;
-        canvas.height = 125;
-        contexto.drawImage(imagemOriginal, 1, 1);
-        contexto.scale(1, 1);
-    
-
-        var novaImagem = new Image();
-        novaImagem.src = canvas.toDataURL();
-
-        document.getElementById("resultado2").appendChild(novaImagem);
-      }
-
-      leitor.readAsDataURL(arquivo);
-    }
-  </script>
-
-  <input type="file" id="inputFile">
-  <button onclick="processarImagem()">Processar</button>
-  <div id="resultado2"></div>
+  <br></br>
 
 </body>
 </html>
