@@ -28,12 +28,15 @@ function processarImagem() {
 
       // Crie um link de download para a imagem
       var downloadLink = document.createElement("a");
+      downloadLink.className = "containerancora"
       downloadLink.href = novaImagem.src;
-      downloadLink.download = "imagem.png";
-      downloadLink.textContent = "Baixar Imagem";
-
+      //downloadLink.download = "" + document.getElementById("nomemedico").textContent + ".png" --errado
+      downloadLink.download = "imagem.bmp";
+      downloadLink.textContent = "Baixar imagem";
+      
       document.getElementById("resultado2").innerHTML = '';
       document.getElementById("resultado2").appendChild(novaImagem);
+      //document.getElementById("resultado2").innerHTML = '';
       document.getElementById("resultado2").appendChild(downloadLink);
     }
 

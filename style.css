@@ -2,6 +2,7 @@
     width: 300px;
     padding: 10px;
     border: 1px solid #ccc;
+    background-color: black;
   }
 
   .container input[type="number"] {
@@ -26,3 +27,23 @@
     border: 1px solid #ccc;
   }
 
+  .containerancora {
+    width: 94%;
+    padding: 2px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .textomedico {
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  #resultado2 {
+    text-align: center;
+  }
+
+  #inputFile {
+    color: white;
+  }
